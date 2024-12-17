@@ -27,7 +27,6 @@ export const StyledWrapperDetails = styled.div `
 `;
 
 export const StyledWrapperLogo = styled.div `
-  border: 1px solid black;
   border-radius: 50%;
   width: 120px;
   height: 120px;

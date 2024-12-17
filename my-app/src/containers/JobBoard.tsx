@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import {
   StyledWrapperSelect,
   StyledWrapperResult,
@@ -11,13 +11,17 @@ import data from "../data/data.json";
 import { JobDataInterface } from "../interface/JobDataInterface.js";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { SelectElement } from "../components/SelectElement/Select.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateSelected,
+  removeSelectedItem,
+  clearAllSelected,
+} from "../store/filters.ts";
+import { RootState } from "../store/store.ts";
 
 const JobBoard: FC = () => {
-  const [selected, setSelected] = useState({
-    roles: [] as string[],
-    levels: [] as string[],
-    languagesAndTools: [] as string[],
-  });
+  const dispatch = useDispatch();
+  const selected = useSelector((state: RootState) => state.filters);
 
   const getUniqueValues = (name: string): string[] => {
     const values = data.flatMap((item) => item[name]);
@@ -39,10 +43,12 @@ const JobBoard: FC = () => {
       const {
         target: { value },
       } = event;
-      setSelected((prevState) => ({
-        ...prevState,
-        [category]: typeof value === "string" ? value.split(",") : value,
-      }));
+      dispatch(
+        updateSelected({
+          category,
+          values: typeof value === "string" ? value.split(",") : value,
+        })
+      );
     };
 
   const selectData = {
@@ -51,21 +57,21 @@ const JobBoard: FC = () => {
       options: allOptions.roles,
       selectedValues: selected.roles,
       handleChange: handleChange("roles"),
-      type: "role",
+      type: "roles",
     },
     levels: {
       name: "Level",
       options: allOptions.levels,
       selectedValues: selected.levels,
       handleChange: handleChange("levels"),
-      type: "level",
+      type: "levels",
     },
     technologies: {
       name: "Technology",
       options: allOptions.languagesAndTools,
       selectedValues: selected.languagesAndTools,
       handleChange: handleChange("languagesAndTools"),
-      type: "technology",
+      type: "languagesAndTools",
     },
   };
 
@@ -74,18 +80,11 @@ const JobBoard: FC = () => {
   );
 
   const handleClearAllItems = () => {
-    setSelected({
-      roles: [],
-      levels: [],
-      languagesAndTools: [],
-    });
+    dispatch(removeSelectedItem());
   };
 
   const handleRemoveItem = (category: keyof typeof selected, value: string) => {
-    setSelected((prevState) => ({
-      ...prevState,
-      [category]: prevState[category].filter((item) => item !== value),
-    }));
+    dispatch(clearAllSelected({ category, value }));
   };
 
   const matchesFilters = (job: JobDataInterface) => {
@@ -126,11 +125,7 @@ const JobBoard: FC = () => {
               <button
                 onClick={() =>
                   handleRemoveItem(
-                    item.type === "role"
-                      ? "roles"
-                      : item.type === "level"
-                      ? "levels"
-                      : "languagesAndTools",
+                    item.type as keyof typeof selected,
                     item.value
                   )
                 }
