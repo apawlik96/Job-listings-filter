@@ -25,12 +25,12 @@ const jobFiltersSlice = createSlice({
     ) {
       state[action.payload.category] = action.payload.values;
     },
-    removeSelectedItem(state) {
+    clearAllSelected(state) {
       state.roles = [];
       state.levels = [];
       state.languagesAndTools = [];
     },
-    clearAllSelected(
+    removeSelectedItem(
       state,
       action: PayloadAction<{ category: keyof JobFiltersState; value: string }>
     ) {

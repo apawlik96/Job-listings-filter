@@ -7,7 +7,6 @@ import {
 } from "./JobBoard.styles.js";
 import { JobItem } from "../components/JobItem/JobItem.tsx";
 import React from "react";
-import data from "../data/data.json";
 import { JobDataInterface } from "../interface/JobDataInterface.js";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { SelectElement } from "../components/SelectElement/Select.tsx";
@@ -20,11 +19,14 @@ import {
 import { RootState } from "../store/store.ts";
 
 const JobBoard: FC = () => {
+  const { jobData, isLoading, isError } = useSelector(
+    (state: RootState) => state.data
+  );
   const dispatch = useDispatch();
   const selected = useSelector((state: RootState) => state.filters);
 
   const getUniqueValues = (name: string): string[] => {
-    const values = data.flatMap((item) => item[name]);
+    const values = jobData.flatMap((item) => item[name]);
     return [...new Set(values)];
   };
 
@@ -75,16 +77,16 @@ const JobBoard: FC = () => {
     },
   };
 
-  const allSelected = Object.values(selectData).flatMap((data) =>
-    data.selectedValues.map((value) => ({ type: data.type, value }))
+  const allSelected = Object.values(selectData).flatMap((jobData) =>
+    jobData.selectedValues.map((value) => ({ type: jobData.type, value }))
   );
 
   const handleClearAllItems = () => {
-    dispatch(removeSelectedItem());
+    dispatch(clearAllSelected());
   };
 
   const handleRemoveItem = (category: keyof typeof selected, value: string) => {
-    dispatch(clearAllSelected({ category, value }));
+    dispatch(removeSelectedItem({ category, value }));
   };
 
   const matchesFilters = (job: JobDataInterface) => {
@@ -102,18 +104,21 @@ const JobBoard: FC = () => {
     return Object.values(filters).every((match) => match);
   };
 
-  const filteredData = data.filter(matchesFilters);
+  const filteredData = jobData.filter(matchesFilters);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading data.</p>;
 
   return (
     <div>
       <StyledWrapperSelect>
-        {Object.entries(selectData).map(([key, data]) => (
+        {Object.entries(selectData).map(([key, jobData]) => (
           <SelectElement
             key={key}
-            name={data.name}
-            options={data.options}
-            selectedValues={data.selectedValues}
-            handleChange={data.handleChange}
+            name={jobData.name}
+            options={jobData.options}
+            selectedValues={jobData.selectedValues}
+            handleChange={jobData.handleChange}
           />
         ))}
       </StyledWrapperSelect>
