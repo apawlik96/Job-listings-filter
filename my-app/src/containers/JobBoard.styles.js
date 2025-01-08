@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1 `
-  text-align:center;
-  font-size: 4rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-`;
-
 export const StyledWrapperSelect = styled.div `
   display: flex;
   flex-wrap: wrap;
