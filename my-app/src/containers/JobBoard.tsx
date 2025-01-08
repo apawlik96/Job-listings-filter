@@ -165,6 +165,7 @@ const JobBoard: FC = () => {
           ))}
         </ul>
       </div>
+      <footer>Job listings filter</footer>
     </div>
   );
 };
