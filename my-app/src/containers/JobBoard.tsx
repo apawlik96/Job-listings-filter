@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {
+  Title,
   StyledWrapperSelect,
   StyledWrapperResult,
   ResultItem,
@@ -111,6 +112,7 @@ const JobBoard: FC = () => {
 
   return (
     <div>
+      <Title>Job Board</Title>
       <StyledWrapperSelect>
         {Object.entries(selectData).map(([key, jobData]) => (
           <SelectElement
