@@ -111,6 +111,7 @@ const JobBoard: FC = () => {
 
   return (
     <div>
+      <h1>Job Board</h1>
       <StyledWrapperSelect>
         {Object.entries(selectData).map(([key, jobData]) => (
           <SelectElement
