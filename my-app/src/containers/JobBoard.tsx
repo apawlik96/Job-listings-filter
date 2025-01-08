@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {
+  Footer,
   StyledWrapperSelect,
   StyledWrapperResult,
   ResultItem,
@@ -165,7 +166,7 @@ const JobBoard: FC = () => {
           ))}
         </ul>
       </div>
-      <footer>Job listings filter</footer>
+      <Footer>Job listings filter</Footer>
     </div>
   );
 };

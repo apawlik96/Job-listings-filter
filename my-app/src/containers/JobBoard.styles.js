@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Footer = styled.p `
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+
 export const StyledWrapperSelect = styled.div `
   display: flex;
   flex-wrap: wrap;
