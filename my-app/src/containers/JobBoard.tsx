@@ -5,6 +5,7 @@ import {
   ResultItem,
   ButtonClear,
   Title,
+  Footer,
 } from "./JobBoard.styles.js";
 import { JobItem } from "../components/JobItem/JobItem.tsx";
 import React from "react";
