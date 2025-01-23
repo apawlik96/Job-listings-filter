@@ -89,3 +89,10 @@ export const Title = styled.h1 `
   text-align: center;
   margin-bottom: 2rem;
 `;
+
+export const Footer = styled.h1 `
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
