@@ -114,6 +114,10 @@ const JobBoard: FC = () => {
   return (
     <div>
       <Title>Job Board</Title>
+      <div>
+        <input type="text" placeholder="Login" />
+        <input type="password" placeholder="Password" />
+      </StyledWrapperLogin>
       <StyledWrapperSelect>
         {Object.entries(selectData).map(([key, jobData]) => (
           <SelectElement
