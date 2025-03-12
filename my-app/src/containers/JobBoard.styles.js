@@ -96,3 +96,21 @@ export const Footer = styled.h1 `
   text-align: center;
   margin-bottom: 2rem;
 `;
+
+export const StyledWrapperLogin = styled.div `
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: #f3f5f5;
+  box-shadow: 0 15px 20px rgba(76, 156, 147, 0.15);
+  margin-bottom: 2rem;
+
+  input {
+        padding: 7px;
+        font-weight: 500;
+        font-size: 1.2rem;
+        border: 1px solid rgba(76, 156, 147, 0.15);
+        border-radius: 5px;
+  }
+`;

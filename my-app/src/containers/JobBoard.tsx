@@ -6,6 +6,7 @@ import {
   ButtonClear,
   Title,
   Footer,
+  StyledWrapperLogin,
 } from "./JobBoard.styles.js";
 import { JobItem } from "../components/JobItem/JobItem.tsx";
 import React from "react";
@@ -114,9 +115,9 @@ const JobBoard: FC = () => {
   return (
     <div>
       <Title>Job Board</Title>
-      <div>
+      <StyledWrapperLogin>
         <input type="text" placeholder="Login" />
-      </div>
+      </StyledWrapperLogin>
       <StyledWrapperSelect>
         {Object.entries(selectData).map(([key, jobData]) => (
           <SelectElement
